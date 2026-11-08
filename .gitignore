@@ -1,0 +1,15 @@
+.env
+*.pyc
+__pycache__/
+logs/*.log
+logs/*.log.*
+!logs/.gitkeep
+homeassistant/.storage/
+homeassistant/.cloud/
+homeassistant/.HA_VERSION
+homeassistant/home-assistant.log*
+homeassistant/home-assistant_v2.db*
+homeassistant/tts/
+homeassistant/deps/
+homeassistant/blueprints/
+.DS_Store

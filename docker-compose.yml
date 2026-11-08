@@ -1,0 +1,36 @@
+services:
+  homeassistant:
+    image: homeassistant/home-assistant:stable
+    container_name: homeassistant
+    restart: unless-stopped
+    mem_limit: 700m
+    environment:
+      TZ: America/Sao_Paulo
+    volumes:
+      - ./homeassistant:/config
+    ports:
+      - "8123:8123"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8123/ >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+      start_period: 90s
+
+  automacao:
+    build: ./automacao
+    container_name: automacao
+    restart: unless-stopped
+    mem_limit: 64m
+    depends_on:
+      homeassistant:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      HA_URL: http://homeassistant:8123
+      TZ: America/Sao_Paulo
+      LOG_DIR: /logs
+      LOG_RETENTION_DAYS: "7"
+    volumes:
+      - ./logs:/logs

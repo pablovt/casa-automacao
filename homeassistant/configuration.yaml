@@ -1,0 +1,21 @@
+# Configuração mínima — otimizada para VPS com pouca RAM.
+# Integrações (Tuya, etc.) são adicionadas pela UI.
+
+default_config:
+
+homeassistant:
+  name: Casa
+  latitude: -29.7175
+  longitude: -52.4258
+  elevation: 70
+  unit_system: metric
+  time_zone: America/Sao_Paulo
+  country: BR
+
+# Se for usar reverse proxy (nginx/Caddy), descomente e ajuste:
+# http:
+#   use_x_forwarded_for: true
+#   trusted_proxies:
+#     - 172.16.0.0/12
+#     - 192.168.0.0/16
+#     - 10.0.0.0/8
